@@ -1,6 +1,8 @@
 package br.com.karate.escola.EscolaKarate.service;
 
 import br.com.karate.escola.EscolaKarate.DTO.UserDTO;
+import br.com.karate.escola.EscolaKarate.exceptions.RegraNegocioException;
+import br.com.karate.escola.EscolaKarate.exceptions.UsuarioExistenteException;
 import br.com.karate.escola.EscolaKarate.models.User;
 import br.com.karate.escola.EscolaKarate.repository.UserRepository;
 import br.com.karate.escola.EscolaKarate.security.JwtUtil;
@@ -33,15 +35,16 @@ public class AuthService implements UserDetailsService {
         return jwtUtil.generateToken(username);
     }
 
-    public void register(User user) {
+    public User register(User user) throws RegraNegocioException {
         if (userRepository.findByUsername(user.getUsername()).isPresent()) {
-            throw new RuntimeException("Usuário já existe!");
+            throw new UsuarioExistenteException("Usuário já existe!");
         }
         if (user.getPassword() == null || user.getPassword().isEmpty()) {
-            throw new IllegalArgumentException("Senha não pode ser nula ou vazia");
+            throw new RegraNegocioException("Senha não pode ser nula ou vazia");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
+        return user;
     }
 
     public UserDTO getUserDetails(String username) {

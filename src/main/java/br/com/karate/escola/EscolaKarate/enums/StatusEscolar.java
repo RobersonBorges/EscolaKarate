@@ -1,9 +1,10 @@
 package br.com.karate.escola.EscolaKarate.enums;
 
 public enum StatusEscolar {
-    APROVADO("Aprovado"),
-    REPROVADO("Reprovado"),
-    RECUPERACAO("Recuperação");
+    ATIVO("Aprovado"),
+    CONCLUIDO("Reprovado"),
+    TRANSFERIDO("Recuperação"),
+    DESISTENTE("Desistente");
 
     private String descricao;
 

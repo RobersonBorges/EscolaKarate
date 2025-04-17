@@ -12,15 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "professores")
-public class Professor {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+public class Professor extends Colaborador {
 
     @ManyToMany
     @JoinTable(

@@ -1,5 +1,7 @@
 package br.com.karate.escola.EscolaKarate.exceptions;
 
+import java.io.Serial;
+
 public class RegraNegocioException extends Exception {
 
     private static final long serialVersionUID = 1L;
