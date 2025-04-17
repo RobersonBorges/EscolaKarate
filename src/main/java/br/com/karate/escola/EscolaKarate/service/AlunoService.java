@@ -43,7 +43,7 @@ public class AlunoService {
         User user = new User();
         user.setUsername(alunoDTO.getUsername());
         user.setRole(Role.ALUNO);
-        user.setPassword("senhapadrao123");
+        user.setPassword(authService.getDefaultPassword());
         try {
             return authService.register(user);
         } catch (UsuarioExistenteException e) {

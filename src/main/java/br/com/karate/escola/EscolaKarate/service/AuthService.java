@@ -6,7 +6,9 @@ import br.com.karate.escola.EscolaKarate.exceptions.UsuarioExistenteException;
 import br.com.karate.escola.EscolaKarate.models.User;
 import br.com.karate.escola.EscolaKarate.repository.UserRepository;
 import br.com.karate.escola.EscolaKarate.security.JwtUtil;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,8 +17,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+@AllArgsConstructor
 @Service
 public class AuthService implements UserDetailsService {
+
+    @Value("${DEFAULT_PASSWORD}")
+    private String defaultPassword;
 
     @Autowired
     private UserRepository userRepository;
@@ -64,6 +70,10 @@ public class AuthService implements UserDetailsService {
 
     public String getUsernameFromToken(String token) {
         return jwtUtil.extractUsername(token);
+    }
+
+    public String getDefaultPassword() {
+        return defaultPassword;
     }
 
 }
