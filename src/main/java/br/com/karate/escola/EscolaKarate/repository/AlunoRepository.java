@@ -2,19 +2,15 @@ package br.com.karate.escola.EscolaKarate.repository;
 
 import br.com.karate.escola.EscolaKarate.enums.StatusEscolar;
 import br.com.karate.escola.EscolaKarate.models.Aluno;
+import br.com.karate.escola.EscolaKarate.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 public interface AlunoRepository extends JpaRepository<Aluno, Long> {
 
-    Optional<Aluno> findByMatricula(String matricula);
-
-    Optional<Aluno> findByUsername(String username);
-
-    List<Aluno> findByTurma(Aluno turma);
+    Aluno findByMatricula(String matricula);
 
     List<Aluno> findByStatusEscolar(StatusEscolar statusEscolar);
 

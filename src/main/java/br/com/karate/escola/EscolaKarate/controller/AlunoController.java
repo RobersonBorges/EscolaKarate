@@ -5,6 +5,7 @@ import br.com.karate.escola.EscolaKarate.exceptions.RegraNegocioException;
 import br.com.karate.escola.EscolaKarate.exceptions.UsuarioExistenteException;
 import br.com.karate.escola.EscolaKarate.models.Aluno;
 import br.com.karate.escola.EscolaKarate.service.AlunoService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,7 @@ public class AlunoController {
     private final AlunoService alunoService;
 
     @PostMapping
-    public ResponseEntity<?> criarAluno(@RequestBody AlunoDTO alunoDTO) {
+    public ResponseEntity<?> criarAluno(@Valid @RequestBody AlunoDTO alunoDTO) {
         try {
             Aluno alunoCriado = alunoService.incluir(alunoDTO);
             return ResponseEntity.ok(alunoCriado);

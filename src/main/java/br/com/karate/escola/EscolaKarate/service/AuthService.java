@@ -6,9 +6,9 @@ import br.com.karate.escola.EscolaKarate.exceptions.UsuarioExistenteException;
 import br.com.karate.escola.EscolaKarate.models.User;
 import br.com.karate.escola.EscolaKarate.repository.UserRepository;
 import br.com.karate.escola.EscolaKarate.security.JwtUtil;
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,24 +17,28 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-@AllArgsConstructor
 @Service
 public class AuthService implements UserDetailsService {
 
+    @Getter
     @Value("${DEFAULT_PASSWORD}")
     private String defaultPassword;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final JwtUtil jwtUtil;
+    private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
 
-    @Autowired
-    private JwtUtil jwtUtil;
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    public AuthService(
+            UserRepository userRepository,
+            JwtUtil jwtUtil,
+            PasswordEncoder passwordEncoder,
+            @Lazy AuthenticationManager authenticationManager) {
+        this.userRepository = userRepository;
+        this.jwtUtil = jwtUtil;
+        this.passwordEncoder = passwordEncoder;
+        this.authenticationManager = authenticationManager;
+    }
 
     public String login(String username, String password) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
@@ -71,9 +75,4 @@ public class AuthService implements UserDetailsService {
     public String getUsernameFromToken(String token) {
         return jwtUtil.extractUsername(token);
     }
-
-    public String getDefaultPassword() {
-        return defaultPassword;
-    }
-
 }
