@@ -1,7 +1,8 @@
 package br.com.karate.escola.EscolaKarate.models;
 
 
-import br.com.karate.escola.EscolaKarate.enums.Role;
+import br.com.karate.escola.EscolaKarate.auth.model.User;
+import br.com.karate.escola.EscolaKarate.geral.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,6 +1,6 @@
 package br.com.karate.escola.EscolaKarate.models;
 
-import br.com.karate.escola.EscolaKarate.enums.TipoMaterial;
+import br.com.karate.escola.EscolaKarate.geral.enums.TipoMaterial;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
