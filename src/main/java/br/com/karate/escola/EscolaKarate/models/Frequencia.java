@@ -1,5 +1,6 @@
 package br.com.karate.escola.EscolaKarate.models;
 
+import br.com.karate.escola.EscolaKarate.alunos.model.Aluno;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
