@@ -26,7 +26,7 @@ public class AlunoController {
     @PostMapping
     public ResponseEntity<?> criarAluno(@Valid @RequestBody AlunoDTO alunoDTO) {
         try {
-            Aluno alunoCriado = alunoService.incluir(alunoDTO);
+            AlunoDTO alunoCriado = alunoService.incluir(alunoDTO);
             return ResponseEntity.ok(alunoCriado);
         } catch (UsuarioExistenteException e) {
             return ResponseEntity.badRequest().body(Map.of(

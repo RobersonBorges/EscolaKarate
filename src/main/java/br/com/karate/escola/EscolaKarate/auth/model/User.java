@@ -3,19 +3,16 @@ package br.com.karate.escola.EscolaKarate.auth.model;
 
 import br.com.karate.escola.EscolaKarate.geral.enums.Role;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class User implements UserDetails {
@@ -36,6 +33,17 @@ public class User implements UserDetails {
 
     @Column(nullable = false)
     private String email;
+
+    @Column(name = "reset_token")
+    private String resetToken;
+
+    @Column(name = "reset_token_expiry")
+    private LocalDateTime resetTokenExpiry;
+
+    public boolean isResetTokenValid() {
+        return resetToken != null && resetTokenExpiry != null &&
+                resetTokenExpiry.isAfter(LocalDateTime.now());
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -72,11 +80,4 @@ public class User implements UserDetails {
         return true;
     }
 
-    public Role getRole() {
-        return role;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

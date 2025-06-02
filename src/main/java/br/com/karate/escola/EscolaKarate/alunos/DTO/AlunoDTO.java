@@ -14,6 +14,7 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class AlunoDTO {
 
     @NotNull(message = "Matrícula obrigatória")

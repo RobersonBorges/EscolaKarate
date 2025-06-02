@@ -1,31 +1,18 @@
 package br.com.karate.escola.EscolaKarate.auth.DTO;
 
 import br.com.karate.escola.EscolaKarate.geral.enums.Role;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class UserDTO {
 
-    private String userName;
+    private String username;
+    private String password;
     private Role role;
+    private String token;
+    private String email;
 
-
-    public void setUserName(String username) {
-        this.userName = username;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public Role getRole() {
-        return role;
-    }
 }
